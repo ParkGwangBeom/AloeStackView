@@ -17,7 +17,16 @@ import UIKit
 import AloeStackView
 
 public class CustomAnimatingLabel: UILabel, CustomAnimating {
-
+    
+  public override init(frame: CGRect) {
+    super.init(frame: frame)
+    backgroundColor = .white
+  }
+    
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+    
   public func animateInsert() {
     transform = .identity
     alpha = 1

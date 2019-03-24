@@ -24,7 +24,6 @@ open class StackViewCell: UIView {
 
   public init(contentView: UIView) {
     self.contentView = contentView
-
     super.init(frame: .zero)
     translatesAutoresizingMaskIntoConstraints = false
     if #available(iOS 11.0, *) {

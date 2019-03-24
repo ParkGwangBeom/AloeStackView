@@ -22,11 +22,14 @@ import UIKit
 open class AloeStackView: UIScrollView {
 
   // MARK: Lifecycle
+    
+    var controller: StickyController?
 
   public init() {
     super.init(frame: .zero)
     setUpViews()
     setUpConstraints()
+    controller = StickyController(stackView: self)
   }
 
   required public init?(coder aDecoder: NSCoder) {
@@ -468,6 +471,7 @@ open class AloeStackView: UIScrollView {
       removeCell(cellToRemove, animated: false)
     }
 
+    controller?.updateStickyRows()
     updateSeparatorVisibility(forCell: cell)
 
     // A cell can affect the visibility of the cell before it, e.g. if
@@ -493,6 +497,8 @@ open class AloeStackView: UIScrollView {
     let completion: (Bool) -> Void = { [weak self] _ in
       guard let `self` = self else { return }
       cell.removeFromSuperview()
+        
+        self.controller?.updateStickyRows()
 
       // When removing a cell, the cell before the removed cell is the only cell whose separator
       // visibility could be affected, so we need to update its visibility.

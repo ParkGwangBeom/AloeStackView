@@ -43,6 +43,7 @@ public class MainViewController: AloeStackViewController {
     setUpHiddenRows()
     setUpCustomAnimatingDescriptionRow()
     setUpCustomAnimatingRow()
+    setUpSticyRow()
     setUpExpandingRowView()
     setUpPhotoRow()
   }
@@ -115,6 +116,16 @@ public class MainViewController: AloeStackViewController {
 
     stackView.setInset(forRow: customAnimatingLabel, inset: rowInset)
   }
+    
+  private func setUpSticyRow() {
+    let stickyRow = StickyRowView()
+    stickyRow.text = "Sticky Header"
+    stickyRow.translatesAutoresizingMaskIntoConstraints = false
+    stickyRow.backgroundColor = UIColor.groupTableViewBackground
+    stackView.addRow(stickyRow)
+
+    stickyRow.heightAnchor.constraint(equalToConstant: 60).isActive = true
+  }
 
   private func setUpExpandingRowView() {
     let expandingRow = ExpandingRowView()
@@ -129,7 +140,7 @@ public class MainViewController: AloeStackViewController {
     guard let image = UIImage(named: "lobster-dog") else { return }
     let aspectRatio = image.size.height / image.size.width
 
-    let imageView = UIImageView(image: image)
+    let imageView = TempImageView(image: image)
     imageView.isUserInteractionEnabled = true
     imageView.contentMode = .scaleAspectFit
     imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: aspectRatio).isActive = true
@@ -142,4 +153,8 @@ public class MainViewController: AloeStackViewController {
     }
   }
 
+}
+
+class TempImageView: UIImageView {
+    
 }
